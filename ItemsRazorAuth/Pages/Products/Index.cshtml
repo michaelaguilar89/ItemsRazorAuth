@@ -1,0 +1,90 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model ItemsRazor.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <h3 class="text-primary text-center">
+                List Of Products 
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a asp-page="/Products/Create" class="btn btn-primary py-3">New</a>
+                }
+                
+            </h3>
+            <div class="col-lg-8 mx-auto">
+                <form method="Get">
+                   <p>
+                        Find by name:
+                        <input type="text" name="search" value="@Model.search" placeholder="Search Data ..." /> 
+                        <button type="submit" class="btn btn-primary">Search</button> |
+                        
+                        <a asp-page="./Index">Back to full List</a>
+
+                      @*  <div class="form-check form-switch">                            
+                            <input class="form-check-input" type="checkbox" >
+                            <label class="form-check-label" >Default View</label>
+                        </div> *@
+                   </p> 
+                </form>
+            </div>
+            @if (Model.list!=null)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Creation Date</th>
+                            <th>User</th>
+                            <th>Comments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.list)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Description)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Price)</td>
+                                <td> @Html.DisplayFor(modelItem => item.CreationDate)</td>
+                                <td> @Html.DisplayFor(modelItem => item.UserName)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Comments)</td>
+                                <td>
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <a class="btn btn-success my-1" asp-page="/Products/Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-danger my-1">Delete</a>
+                                    }
+
+                                    <a class="btn btn-secondary my-1" asp-page="/Products/Details" asp-route-id="@item.Id">Details</a>
+                                  
+                                </td>
+
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h3 class="text-danger text-center">
+                    @Model.ErrorMessage
+                    <a asp-page="/Products/Index" class="btn btn-primary">Try Again</a>
+                </h3>
+            }
+           
+        </div>
+    </div>
+</div>

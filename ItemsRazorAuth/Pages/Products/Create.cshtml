@@ -1,0 +1,57 @@
+﻿@page
+@model ItemsRazor.Pages.Products.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <h3 class="text-success text-center"> Create Product</h3>
+           
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="productDto.Name" class="control-label"></label>
+                    <input asp-for="productDto.Name" class="form-control" />
+                    <span asp-validation-for="productDto.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="productDto.Description" class="control-label"></label>
+                    <input asp-for="productDto.Description" class="form-control" />
+                    <span asp-validation-for="productDto.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="productDto.Quantity" class="control-label"></label>
+                    <input asp-for="productDto.Quantity" class="form-control" />
+                    <span asp-validation-for="productDto.Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="productDto.Price" class="control-label"></label>
+                    <input asp-for="productDto.Price" class="form-control" />
+                    <span asp-validation-for="productDto.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="productDto.Comments" class="control-label"></label>
+                    <input asp-for="productDto.Comments" class="form-control" />
+                    <span asp-validation-for="productDto.Comments" class="text-danger"></span>
+                </div>
+                <div class="form-group pl-3 mx-auto mt-3">
+                    <button type="submit" class="btn btn-primary mx-3">Save</button>
+                    <a asp-page="/Products/Index" class="btn btn-secondary">Go Index</a>
+                </div>
+            </form>
+            @if (@Model.ErrorMessage!=null)
+            {
+                <h3 class="text-danger text-center">
+                    @Model.ErrorMessage
+                </h3>
+            }
+                
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
