@@ -4,7 +4,32 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h2>Descripción del Proyecto</h2>
+            <p>Este proyecto es una aplicación web integral para la administración de inventarios, desarrollada utilizando las tecnologías más recientes de .NET. La aplicación ofrece una interfaz intuitiva y eficiente para gestionar productos, así como funcionalidades de autenticación seguras y comunicación en tiempo real entre los usuarios. A continuación, se detallan las características principales del proyecto:</p>
+
+            <div class="col-md-10">
+                <h2>Características Principales</h2>
+                <h3>  Administración de Inventarios:</h3>
+                <p>
+                    * La aplicación permite a los usuarios gestionar el inventario de productos con facilidad. Las funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) están implementadas utilizando Razor Pages y Entity Framework Core 8 para interactuar con una base de datos SQL Server.
+                    </br>  * Los usuarios pueden agregar nuevos productos, ver detalles de los productos existentes, actualizar la información y eliminar productos del inventario.
+                </p>
+                <h3>  Autenticación y Autorización con ASP.NET Core Identity:</h3>
+                <p>
+                    * Registro de Usuarios: Los nuevos usuarios pueden crear una cuenta proporcionando los detalles necesarios.
+                    </br> * Inicio de Sesión: Los usuarios registrados pueden iniciar sesión para acceder a las funcionalidades de la aplicación.
+                    </br> * Cierre de Sesión: Los usuarios pueden cerrar sesión de manera segura.
+                    </br> * Roles y Permisos: La aplicación gestiona diferentes roles de usuario para controlar el acceso a determinadas funcionalidades (por ejemplo, administrador, usuario estándar).
+                </p>
+               
+                    <a class="my-3" asp-page="/Chat/Index">Go to Chat</a>
+                    <a asp-page="/Products/Index">Go Home</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+
