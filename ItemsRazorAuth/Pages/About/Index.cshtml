@@ -1,0 +1,48 @@
+﻿@page
+@model ItemsRazorAuth.Pages.About.IndexModel
+@{
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h2>Descripción del Proyecto</h2>
+            <p>Este proyecto es una aplicación web integral para la administración de inventarios, desarrollada utilizando las tecnologías más recientes de .NET. La aplicación ofrece una interfaz intuitiva y eficiente para gestionar productos, así como funcionalidades de autenticación seguras y comunicación en tiempo real entre los usuarios. A continuación, se detallan las características principales del proyecto:</p>
+            
+            <div class="col-md-10">
+                <h2>Características Principales</h2>
+                <h3> 1. Administración de Inventarios:</h3>
+                <p>
+                   * La aplicación permite a los usuarios gestionar el inventario de productos con facilidad. Las funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) están implementadas utilizando Razor Pages y Entity Framework Core 8 para interactuar con una base de datos SQL Server.
+                    </br>  * Los usuarios pueden agregar nuevos productos, ver detalles de los productos existentes, actualizar la información y eliminar productos del inventario.
+                </p>
+                <h3> 2 . Autenticación y Autorización con ASP.NET Core Identity:</h3>
+                <p>
+                   * Registro de Usuarios: Los nuevos usuarios pueden crear una cuenta proporcionando los detalles necesarios.
+                  </br> * Inicio de Sesión: Los usuarios registrados pueden iniciar sesión para acceder a las funcionalidades de la aplicación.
+                    </br> * Cierre de Sesión: Los usuarios pueden cerrar sesión de manera segura.
+                    </br> * Roles y Permisos: La aplicación gestiona diferentes roles de usuario para controlar el acceso a determinadas funcionalidades (por ejemplo, administrador, usuario estándar).
+                </p>
+                <h3> 3. Sistema de Chat en Tiempo Real:</h3>
+                <p>
+                    * Implementado utilizando SignalR, permite a los usuarios comunicarse entre sí en tiempo real.
+                    </br>    * Facilita la colaboración y la resolución de problemas dentro del equipo de gestión de inventarios.
+
+                </p>
+                <h3> 4. Tecnologías Utilizadas:</h3>
+                <p>
+                    ASP.NET Core con Razor Pages: Framework principal para la construcción de la aplicación web.
+                    </br> <b>ASP.NET Core Identity:</b> Proporciona el sistema de autenticación y autorización.
+                    </br> <b>SignalR:</b> Biblioteca para agregar funcionalidad de chat en tiempo real.
+                    </br> <b>Entity Framework Core 8</b>Entity Framework Core 8: ORM utilizado para el acceso y la manipulación de la base de datos SQL Server.
+                    </br> <b>SQL Server</b>SQL Server: Base de datos utilizada para almacenar la información de los productos y usuarios.
+                    </br> <b>Visual Studio:</b> Entorno de desarrollo integrado (IDE) utilizado para desarrollar y depurar la aplicación.
+                </p>  
+                <p>
+                    <a class="my-3" asp-page="/Chat/Index">Go to Chat</a>
+                    <a asp-page="/Products/Index">Go Home</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

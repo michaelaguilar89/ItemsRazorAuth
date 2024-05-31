@@ -17,9 +17,7 @@ namespace ItemsRazor.Pages.Products
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration Configuration;
 
-        public IndexModel(ApplicationDbContext context, IConfiguration configuration
-                          
-                         )
+        public IndexModel(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
             Configuration = configuration;
@@ -27,11 +25,10 @@ namespace ItemsRazor.Pages.Products
         }
         [BindProperty(SupportsGet =true)]
         public IList<ProductDto> list { get; set; }
-      //  [BindProperty(SupportsGet=true)]
-      //  public Boolean DefaulltView { get; set; }
         [BindProperty(SupportsGet = true)]
         public string search { get; set; }
         public string ErrorMessage { get; set; }
+        public string TitleView { get; set; }
 
         public PaginatedList<ProductDto> Products { get; set; }
 
@@ -39,7 +36,6 @@ namespace ItemsRazor.Pages.Products
         {
             try
             {
-             
                 if (!String.IsNullOrEmpty(search))
                 {
                     
@@ -102,6 +98,26 @@ namespace ItemsRazor.Pages.Products
 
         }
 
-      
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            try
+            {
+                var item =await _context.Products.FindAsync(id);
+                if (item!=null)
+                {
+                    _context.Products.Remove(item);
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("/Products/Index");
+                }
+                ErrorMessage = "Concurrency Exeption, Product Not found!";
+                return Page();
+            }
+            catch (Exception e)
+            {
+
+                ErrorMessage = e.Message;
+                return Page();
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using ItemsRazorAuth.ChatHub;
 using ItemsRazorAuth.Data;
 using ItemsRazorAuth.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
-
+builder.Services.AddSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,6 +36,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.MapRazorPages();
+//signalr configuration
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
