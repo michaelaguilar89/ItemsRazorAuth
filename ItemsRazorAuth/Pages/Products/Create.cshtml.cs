@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using Microsoft.EntityFrameworkCore;
-using ItemsRazorAuth.Models;
+using SharedProyect.Models;
 using Microsoft.AspNetCore.Identity;
 using ItemsRazorAuth.Data;
 using Microsoft.AspNetCore.Authorization;

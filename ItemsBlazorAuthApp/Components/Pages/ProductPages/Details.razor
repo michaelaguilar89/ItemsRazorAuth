@@ -1,0 +1,57 @@
+﻿@page "/products/details"
+@inject ItemsBlazorAuthApp.Data.ApplicationDbContext DB
+@using ItemsBlazorAuthApp.Models
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    @if (product is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@product.Name</dd>
+            <dt class="col-sm-2">Description</dt>
+            <dd class="col-sm-10">@product.Description</dd>
+            <dt class="col-sm-2">Price</dt>
+            <dd class="col-sm-10">@product.Price</dd>
+            <dt class="col-sm-2">Quantity</dt>
+            <dd class="col-sm-10">@product.Quantity</dd>
+            <dt class="col-sm-2">Comments</dt>
+            <dd class="col-sm-10">@product.Comments</dd>
+            <dt class="col-sm-2">CreationDate</dt>
+            <dd class="col-sm-10">@product.CreationDate</dd>
+            <dt class="col-sm-2">UserId</dt>
+            <dd class="col-sm-10">@product.UserId</dd>
+        </dl>
+        <div>
+            <a href="@($"/products/edit?id={product.Id}")">Edit</a> |
+            <a href="@($"/products")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    Product? product;
+
+    [SupplyParameterFromQuery]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await DB.Products.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (product is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

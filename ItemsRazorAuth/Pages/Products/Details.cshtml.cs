@@ -1,6 +1,6 @@
 using ItemsRazorAuth.Data;
-using ItemsRazorAuth.Dto;
-using ItemsRazorAuth.Models;
+using SharedProyect.Dto;
+using SharedProyect.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

@@ -1,4 +1,4 @@
-﻿using ItemsRazorAuth.Models;
+﻿using Shared.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
 
 using ItemsRazorAuth.Data;
-using ItemsRazorAuth.Dto;
+using SharedProyect.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
@@ -30,7 +30,7 @@ namespace ItemsRazor.Pages.Products
         public string ErrorMessage { get; set; }
         public string TitleView { get; set; }
 
-        public PaginatedList<ProductDto> Products { get; set; }
+        //public PaginatedList<ProductDto> Products { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {

@@ -1,0 +1,142 @@
+﻿@page "/products"
+@inject ItemsBlazorAuthApp.Data.ApplicationDbContext _context
+@inject NavigationManager NavigationManager
+@using ItemsBlazorAuthApp.Models
+@using ItemsBlazorAuthApp.Dto
+
+@using Microsoft.EntityFrameworkCore
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mx-auto" style="background-color:whitesmoke">
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <h3>Error Messages: @ErrorMessage</h3>
+            }
+            <h3 class="text-primary text-center">
+                List Of Products
+                <a href="/products/create" class="btn btn-primary py-3">New</a>
+                <h2 class="card-title success">You are not logged in, register for advanced options</h2>
+            </h3>
+
+            <div class="col-lg-8 mx-auto">
+                <form method="get">
+                    <p>
+                        Find by name:
+                        <input type="text" name="search" value="@search" placeholder="Search Data ..." />
+                        <button type="submit" class="btn btn-primary">Search</button> |
+                        <a href="/products">Back to full List</a>
+                    </p>
+                </form>
+            </div>
+
+            @if (list != null && list.Count > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Creation Date</th>
+                            <th>User</th>
+                            <th>Comments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in list)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
+                                <td>@item.CreationDate</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Comments</td>
+                                <td>
+                                    <a class="btn btn-success my-1" href="/products/edit/@item.Id">Edit</a>
+                                    <a class="btn btn-danger" href="/products/delete/@item.Id">Delete</a>
+                                    <a class="btn btn-secondary my-1" href="/products/details/@item.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h3 class="text-danger text-center">
+                    No products found.
+                    <a href="/products" class="btn btn-primary">Try Again</a>
+                </h3>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<ProductDto> list;
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "search")]
+    public string search { get; set; }
+
+    public string ErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(search))
+            {
+                list = await _context.Products
+                    .Include(p => p.User)
+                    .Where(p => p.Name.Contains(search) || p.Description.Contains(search))
+                    .Select(p => new ProductDto
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Description = p.Description,
+                            Price = p.Price,
+                            Quantity = p.Quantity,
+                            Comments = p.Comments,
+                            CreationDate = p.CreationDate,
+                            UserName = p.User.UserName
+                        }).ToListAsync();
+            }
+            else
+            {
+                list = await _context.Products
+                    .Include(p => p.User)
+                    .Select(p => new ProductDto
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Description = p.Description,
+                            Price = p.Price,
+                            Quantity = p.Quantity,
+                            Comments = p.Comments,
+                            CreationDate = p.CreationDate,
+                            UserName = p.User.UserName
+                        }).ToListAsync();
+            }
+
+            if (list == null || list.Count == 0)
+            {
+                ErrorMessage = "No products found, try again later.";
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"An error occurred: {ex.Message}";
+        }
+    }
+}
+
