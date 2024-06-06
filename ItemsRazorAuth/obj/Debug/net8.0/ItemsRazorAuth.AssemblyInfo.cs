@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ItemsRazorAuth")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10622c3c5a086a48cd1e5cb217e873a09a6ed020")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3168e8fa5618a9cf1c962b295c2218f763190fbf")]
 [assembly: System.Reflection.AssemblyProductAttribute("ItemsRazorAuth")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ItemsRazorAuth")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

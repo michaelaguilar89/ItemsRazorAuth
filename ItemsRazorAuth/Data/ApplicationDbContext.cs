@@ -1,4 +1,4 @@
-﻿using Shared.Models;
+﻿using SharedProyect.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

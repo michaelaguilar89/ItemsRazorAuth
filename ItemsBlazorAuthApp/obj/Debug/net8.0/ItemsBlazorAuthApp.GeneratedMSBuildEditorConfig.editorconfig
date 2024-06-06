@@ -186,6 +186,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mchla/OneDrive/Documentos/Proyectos/ItemsRazorAuth/ItemsBlazorAuthApp/Components/Pages/Chat/ChatRoom.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGF0XENoYXRSb29tLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mchla/OneDrive/Documentos/Proyectos/ItemsRazorAuth/ItemsBlazorAuthApp/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -204,6 +208,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mchla/OneDrive/Documentos/Proyectos/ItemsRazorAuth/ItemsBlazorAuthApp/Components/Pages/ProductPages/Details.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0UGFnZXNcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mchla/OneDrive/Documentos/Proyectos/ItemsRazorAuth/ItemsBlazorAuthApp/Components/Pages/ProductPages/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0UGFnZXNcRWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mchla/OneDrive/Documentos/Proyectos/ItemsRazorAuth/ItemsBlazorAuthApp/Components/Pages/ProductPages/Index.razor]

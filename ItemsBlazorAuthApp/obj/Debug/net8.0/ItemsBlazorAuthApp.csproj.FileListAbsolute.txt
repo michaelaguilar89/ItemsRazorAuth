@@ -267,3 +267,17 @@ C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\b
 C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\EntityFramework.SqlServer.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\EntityFramework.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\SharedProyect.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\SharedProyect.pdb
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\ItemsBlazorAuthApp\bin\Debug\net8.0\Microsoft.Extensions.Features.dll

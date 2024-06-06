@@ -1,0 +1,142 @@
+﻿@page "/products/edit/{id:int}"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@inject ItemsBlazorAuthApp.Service.ProductService Service
+@using Microsoft.AspNetCore.Authorization
+@using SharedProyect.Dto
+@using ItemsBlazorAuthApp.Models
+
+
+@attribute [Authorize]
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3 class="card-title">Edit Product</h3>
+            @if (ErrorMessages!=null)
+            {
+                <h3 class="text-danger">@ErrorMessages</h3>
+            }
+            @if (productDto != null)
+            {
+                <EditForm Model="@productDto" OnValidSubmit="@Post" FormName="UpdateModel">
+                    <DataAnnotationsValidator/>
+                       <ValidationSummary/>
+                            <input class="form-control" @bind-value="productDto.Id" hidden />
+
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                        <input class="form-control" @bind-value="productDto.Name" />
+                        <ValidationMessage For="(()=>productDto.Name)" class="text-danger"></ValidationMessage>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Description</label>
+                        <input class="form-control" @bind-value="productDto.Description" />
+                        <ValidationMessage For="(()=>productDto.Description)" class="text-danger"></ValidationMessage>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Price</label>
+                        <input class="form-control" @bind-value="productDto.Price" />
+                        <ValidationMessage For="(()=>productDto.Price)" class="text-danger"></ValidationMessage>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Quantity</label>
+                        <input class="form-control" @bind-value="productDto.Quantity" />
+                        <ValidationMessage For="(()=>productDto.Quantity)" class="text-danger"></ValidationMessage>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Comments</label>
+                        <input class="form-control" @bind-value="productDto.Comments" />
+                        <ValidationMessage For="(()=>productDto.Comments)" class="text-danger"></ValidationMessage>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">CreationDate</label>
+                        <input class="form-control" @bind-value="productDto.CreationDate" />
+                        <ValidationMessage For="(()=>productDto.CreationDate)" class="text-danger"></ValidationMessage>
+                            </div>
+                   
+                        <input class="form-control" @bind-value="productDto.UserId" hidden />
+
+                            <div class="form-group">
+                                <label class="control-label">User</label>
+                        <input class="form-control" @bind-value="productDto.UserName" readonly />
+                        <ValidationMessage For="(()=>productDto.UserName)" class="text-danger"></ValidationMessage>
+                            </div>
+
+                            <div class="form-group text-center mt-3">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button class="btn btn-success" @onclick="Navigate">Go Back</button>
+                            </div>
+                                            
+                    
+                </EditForm>
+            }
+            else
+            {
+                <p><em>Loading...</em></p>
+            }     
+              
+       </div>
+    </div>
+</div>
+
+@code{
+
+    [Parameter]
+    public int? id{ get; set; }
+    private string ErrorMessages{ get; set; }
+
+    private Product product { get; set; } = new();
+    [SupplyParameterFromForm]
+    private ProductDto productDto { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (id==null)
+            {
+                ErrorMessages = "Product Not Found!";
+            }else{
+                productDto = await Service.GetById(id);
+            }
+
+        }
+        catch (Exception e)
+        {
+
+            ErrorMessages = e.Message;
+            Console.WriteLine("Error : " + e.Message);
+        }
+    }
+    private void Navigate()
+    {
+        Navigation.NavigateTo("/");
+    }
+    private async Task Post()
+    {
+        try
+        {
+
+            var data = await Service.Update(productDto);
+            if (data =="1")
+            {
+                Navigation.NavigateTo("/products");
+            }
+            else
+            {
+                ErrorMessages = data;
+            }
+
+
+        }
+        catch (Exception e)
+        {
+
+            ErrorMessages = e.Message;
+            Console.WriteLine("Error on Submit : "+e.Message);
+
+        }
+       
+    }
+}

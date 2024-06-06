@@ -1,57 +1,100 @@
-﻿@page "/products/details"
-@inject ItemsBlazorAuthApp.Data.ApplicationDbContext DB
-@using ItemsBlazorAuthApp.Models
-@inject NavigationManager NavigationManager
-@using Microsoft.EntityFrameworkCore
+﻿@page "/products/details/{Id:int}/{Action:int}"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@inject ItemsBlazorAuthApp.Service.ProductService Service
+@using SharedProyect.Dto
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            @if (ErrorMessage!=null)
+            {
+                <h3 class="text-danger">@ErrorMessage</h3>
+            }
+            @if (product==null)
+            {
+                <p>Loading</p>
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-header">
+                       <h2 class="card-title text-success text-center">@Title</h2>
+                    </div>
+                    <div class="card-body">
+                         <h3 class="card-title text-primary">@product.Name</h3>
+                        <p class="card-text">Description : @product.Description</p>
+                        <p class="card-text">Price : @product.Price</p>
+                        <p class="card-text">Quantity : @product.Quantity</p>
+                        <p class="card-text">Creation Date : @product.CreationDate</p>
+                        <p class="card-text">User : @product.UserName</p>
+                        <p class="card-text">Comments : @product.Comments</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="mx-2"  href="/products">Go Back</a>
+                        @if (Action == 1)
+                        {
+                            <button class="btn btn-danger" @onclick="(()=>DeleteAsync(product.Id))">Delete</button>
+                        } 
+                        
+                    </div>
+                </div>
+            }
 
-<PageTitle>Details</PageTitle>
-
-<h1>Details</h1>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    @if (product is null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else {
-        <dl class="row">
-            <dt class="col-sm-2">Name</dt>
-            <dd class="col-sm-10">@product.Name</dd>
-            <dt class="col-sm-2">Description</dt>
-            <dd class="col-sm-10">@product.Description</dd>
-            <dt class="col-sm-2">Price</dt>
-            <dd class="col-sm-10">@product.Price</dd>
-            <dt class="col-sm-2">Quantity</dt>
-            <dd class="col-sm-10">@product.Quantity</dd>
-            <dt class="col-sm-2">Comments</dt>
-            <dd class="col-sm-10">@product.Comments</dd>
-            <dt class="col-sm-2">CreationDate</dt>
-            <dd class="col-sm-10">@product.CreationDate</dd>
-            <dt class="col-sm-2">UserId</dt>
-            <dd class="col-sm-10">@product.UserId</dd>
-        </dl>
-        <div>
-            <a href="@($"/products/edit?id={product.Id}")">Edit</a> |
-            <a href="@($"/products")">Back to List</a>
         </div>
-    }
+    </div>
 </div>
 
 @code {
-    Product? product;
+    [Parameter]
+    public int Id{ get; set; }
+    [Parameter]
+    public int Action{ get; set; }
+    private ProductDto product{ get; set; }
 
-    [SupplyParameterFromQuery]
-    public int Id { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        product = await DB.Products.FirstOrDefaultAsync(m => m.Id == Id);
-
-        if (product is null)
+    private string ErrorMessage{ get; set; }
+    private string Title { get; set; } = "Product Details";
+    protected override async Task OnInitializedAsync(){
+        try
         {
-            NavigationManager.NavigateTo("notfound");
+            if (Id==null)
+            {
+                ErrorMessage = "Id is null, not found!";
+            }
+            else
+            {
+                if (Action==1)
+                {
+                    Title = "Are you sure you want to delete ?";
+                }
+                product = await Service.GetById(Id);
+            }
+
+        }catch(Exception e)
+        {
+            ErrorMessage = e.Message;
         }
     }
+
+    private async Task DeleteAsync(int id)
+    {
+        try
+        {
+            var res = await Service.Delete(id);
+            if (res=="1")
+            {
+                Navigation.NavigateTo("/products");
+            }
+            else
+            {
+                ErrorMessage = res;
+            }
+        }
+        catch(Exception e)
+        {
+        ErrorMessage = e.Message;
+        }
+}
+
 }

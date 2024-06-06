@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SharedProyect.Models
 {
@@ -21,6 +22,7 @@ namespace SharedProyect.Models
         [Required]
         public DateTime CreationDate { get; set; }
         public string? UserId { get; set; }
+       
         public IdentityUser User { get; set; }
     }
 }

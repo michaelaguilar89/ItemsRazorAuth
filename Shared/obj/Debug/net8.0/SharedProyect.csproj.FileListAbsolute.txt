@@ -1,0 +1,13 @@
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\bin\Debug\net8.0\SharedProyect.deps.json
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\bin\Debug\net8.0\SharedProyect.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\bin\Debug\net8.0\SharedProyect.pdb
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.csproj.AssemblyReference.cache
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.AssemblyInfoInputs.cache
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.AssemblyInfo.cs
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.csproj.CoreCompileInputs.cache
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.sourcelink.json
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\refint\SharedProyect.dll
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\SharedProyect.pdb
+C:\Users\mchla\OneDrive\Documentos\Proyectos\ItemsRazorAuth\Shared\obj\Debug\net8.0\ref\SharedProyect.dll

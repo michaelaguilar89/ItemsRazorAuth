@@ -1,121 +1,119 @@
-﻿@page "/product/create"
-
-@inject NavigationManager NavigationManager
+﻿@page "/products/create"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
 @inject ItemsBlazorAuthApp.Data.ApplicationDbContext _context
-@inject Shared.Dto.ProductInsertDto productDto
-@inject Shared.Models.Product product
+@using SharedProyect.Dto
+@using ItemsBlazorAuthApp.Models
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ItemsBlazorAuthApp.Service.ProductService Service
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3 class="text-center">Create Product</h3>
+            <EditForm Model="@productDto" OnValidSubmit="Post" FormName="createProductForm">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
-<AuthorizeView>
-    <Authorized>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <h3 class="text-center">Create Product</h3>
-                    <EditForm Model="@productDto" OnValidSubmit="@SubmitProduct">
-                        <DataAnnotationsValidator />
-                        <ValidationSummary />
-
-                        <div class="form-group">
-                            <label for="name" class="control-label">Name</label>
-                            <InputText id="name" @bind-Value="productDto.Name" class="form-control" />
-                            <ValidationMessage For="@(() => productDto.Name)" class="text-danger" />
-                        </div>
-                        <div class="form-group">
-                            <label for="description" class="control-label">Description</label>
-                            <InputText id="description" @bind-Value="productDto.Description" class="form-control" />
-                            <ValidationMessage For="@(() => productDto.Description)" class="text-danger" />
-                        </div>
-                        <div class="form-group">
-                            <label for="price" class="control-label">Price</label>
-                            <InputNumber id="price" @bind-Value="productDto.Price" class="form-control" />
-                            <ValidationMessage For="@(() => productDto.Price)" class="text-danger" />
-                        </div>
-                        <div class="form-group">
-                            <label for="quantity" class="control-label">Quantity</label>
-                            <InputNumber id="quantity" @bind-Value="productDto.Quantity" class="form-control" />
-                            <ValidationMessage For="@(() => productDto.Quantity)" class="text-danger" />
-                        </div>
-                        <div class="form-group">
-                            <label for="comments" class="control-label">Comments</label>
-                            <InputText id="comments" @bind-Value="productDto.Comments" class="form-control" />
-                            <ValidationMessage For="@(() => productDto.Comments)" class="text-danger" />
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Save</button>
-                            <a href="/products" class="btn btn-secondary">Go Back</a>
-                        </div>
-                    </EditForm>
-                    @if (!string.IsNullOrEmpty(ErrorMessages))
-                    {
-                        <h3 class="text-danger text-center">@ErrorMessages</h3>
-                    }
+                <div class="form-group">
+                    <label for="name" class="control-label">Name</label>
+                    <InputText id="name" @bind-Value="productDto.Name" class="form-control" />
+                    <ValidationMessage For="@(() => productDto.Name)" class="text-danger" />
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="description" class="control-label">Description</label>
+                    <InputText id="description" @bind-Value="productDto.Description" class="form-control" />
+                    <ValidationMessage For="@(() => productDto.Description)" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label for="price" class="control-label">Price</label>
+                    <InputNumber id="price" @bind-Value="productDto.Price" class="form-control" />
+                    <ValidationMessage For="@(() => productDto.Price)" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label for="quantity" class="control-label">Quantity</label>
+                    <InputNumber id="quantity" @bind-Value="productDto.Quantity" class="form-control" />
+                    <ValidationMessage For="@(() => productDto.Quantity)" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label for="comments" class="control-label">Comments</label>
+                    <InputText id="comments" @bind-Value="productDto.Comments" class="form-control" />
+                    <ValidationMessage For="@(() => productDto.Comments)" class="text-danger" />
+                </div>
+                <div class="form-group mt-3 text-center">
+                    <button class="btn btn-primary btn-lg mx-3" type="submit">Save</button>
+                    <button class="btn btn-secondary btn-lg" @onclick="NavigationRoute">Go Back</button>
+                </div>
+            </EditForm>
+            @if (!string.IsNullOrEmpty(ErrorMessages))
+            {
+                <h3 class="text-danger text-center">@ErrorMessages</h3>
+            }
         </div>
-    </Authorized>
-    <NotAuthorized>
-        <p class="text-danger text-center">You are not authorized to view this page. Please log in.</p>
-    </NotAuthorized>
-</AuthorizeView>
+    </div>
+</div>
 
 @code {
-
     public string ErrorMessages { get; set; }
+
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
-    private async Task SubmitProduct()
+
+    public Product product { get; set; } = new();
+    [SupplyParameterFromForm]
+    public ProductInsertDto productDto { get; set; } = new();
+
+    private async Task Post()
     {
         try
         {
-            var item = _context.Products.FirstOrDefault(x => x.Name.Equals(productDto.Name));
-            if (item == null)
+
+
+            var authState = await authenticationStateTask;
+            var user = authState.User;
+
+            if (user.Identity.IsAuthenticated)
             {
-                product.Name = productDto.Name;
-                product.Description = productDto.Description;
-                product.Quantity = productDto.Quantity;
-                product.Price = productDto.Price;
-                product.Comments = productDto.Comments;
-                product.CreationDate = DateTime.Now;
-
-                //for blazor 
-                var authState = await authenticationStateTask;
-                var userName = authState.User;
-                //other options
-                //  AuthenticationState authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                //  ClaimsPrincipal user = authState.User;
-
-                // if (user.Identity.IsAuthenticated)
-                //{
-                // work with user.Claims and/or user.Roles
-                //}
-                //for razor pages
-                //var user = await _userManager.GetUserAsync(User);
-                if (userName != null)
+                //Get cuuret UserId from Database
+                var currentUser = _context.Users.FirstOrDefault(x => x.UserName == user.Identity.Name);
+                if (currentUser != null)
                 {
-                    var user = _context.Users.FirstOrDefault(x => x.UserName == userName.ToString());
-                    product.UserId = user.Id;
-                    _context.Products.Add(product);
-                    await _context.SaveChangesAsync();
-                    NavigationManager.NavigateTo("/products");
+                    var result= Service.Create(productDto,currentUser.Id);
+                    if (await result =="1")
+                    {
+                     
+                        await Task.Delay(2000); // Pequeño retraso para asegurar que todo se ha procesado
+                        Navigation.NavigateTo("/products");
+                    }
+                    else
+                    {
+                        ErrorMessages = await result;
+                    }
+
+                       
                 }
                 else
                 {
-                    ErrorMessages = "User not found.";
+                        ErrorMessages = "User not found.";
                 }
-            }
-            else
-            {
-                ErrorMessages = "Concurrency error, product name already exists.";
-            }
+             }
+             else
+             {
+                    ErrorMessages = "User is not authenticated.";
+             }
+            
+          
         }
         catch (Exception e)
         {
             ErrorMessages = e.Message;
         }
+    }
+
+    public void NavigationRoute(){
+        Navigation.NavigateTo("/products");
     }
 }
